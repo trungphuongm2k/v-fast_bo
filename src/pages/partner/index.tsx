@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";
-import styles from "./Partner.module.scss";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import classNames from "classnames/bind";
+import styles from "./Partner.module.scss";
 import { Button, Form, Modal, Popconfirm, Table, Input, Upload } from "antd";
 import {
   EditFilled,
@@ -17,7 +18,6 @@ import {
   updateOnePartner,
 } from "../../utils/fetchApi";
 import { openNotificationWithIcon } from "../../contexts/auth";
-import Image from "next/image";
 const cx = classNames.bind(styles);
 
 interface DataType {
@@ -40,7 +40,7 @@ function Partner() {
   const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
   const [loadingAddPartner, setLoadingAddPartner] = useState<boolean>(false);
   const [openModalAdd, setOpenModalAdd] = useState<boolean>(false);
-  const [updatePartner, updateDataPartner] = useState<DataType>();
+  const [updatePartner, setUpdatePartner] = useState<DataType>();
   const [openModalUpdate, setOpenModalUpdate] = useState<boolean>(false);
   const [loadingUpdatePartner, setLoadingUpdatePartner] =
     useState<boolean>(false);
@@ -144,7 +144,7 @@ function Partner() {
   };
   const handleOpenModalUpdate = (id: string) => {
     const checkPartner = dataPartner.filter((partner) => partner.id === id)[0];
-    updateDataPartner(checkPartner);
+    setUpdatePartner(checkPartner);
     form.setFieldsValue({
       name: checkPartner.name,
       url: checkPartner.url,
@@ -199,6 +199,7 @@ function Partner() {
             src={process.env.HOST_NAME_API + img}
             alt="partner"
             layout="fill"
+            objectFit="contain"
           />
         </div>
       ),
@@ -396,6 +397,7 @@ function Partner() {
       <Table
         columns={columns}
         dataSource={dataPartner}
+        pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}
         tableLayout={"auto"}
         scroll={{ x: 900 }}
         loading={loading}

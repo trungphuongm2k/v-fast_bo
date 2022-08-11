@@ -37,6 +37,7 @@ const modules = {
       },
       {
         background: [
+          "",
           "#000000d9",
           "#fff",
           "red",
@@ -65,6 +66,8 @@ const formats = [
   "link",
   "image",
   "color",
+  "align",
+  "background"
 ];
 export type typePolicy = {
   id: string;

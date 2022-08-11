@@ -3,11 +3,11 @@ import Link from "next/link";
 import classNames from "classnames/bind";
 import { useRouter } from "next/router";
 import {
-  HomeOutlined,
-  InfoCircleOutlined,
-  ContactsOutlined,
-  TeamOutlined,
-  ReadOutlined,
+  HomeFilled,
+  CustomerServiceFilled,
+  GoldFilled,
+  ContactsFilled,
+  ReadFilled,
   DoubleRightOutlined,
   DoubleLeftOutlined,
 } from "@ant-design/icons";
@@ -17,33 +17,38 @@ function Navbar() {
   const navList = [
     {
       id: 1,
-      title: "Trang chủ",
+      title: "Thông tin chung",
       url: "/",
-      icon: <HomeOutlined />,
+      icon: <HomeFilled />,
+      color:"#ee2b2b"
     },
     {
       id: 2,
-      title: "Thông tin chung",
-      url: "/info",
-      icon: <InfoCircleOutlined />,
+      title: "Danh sách dịch vụ",
+      url: "/service",
+      icon: <CustomerServiceFilled/>,
+      color:"#8f11d3"
     },
     {
       id: 3,
       title: "Danh sách đối tác",
       url: "/partner",
-      icon: <TeamOutlined />,
+      icon: <GoldFilled />,
+      color:"#11d37b"
     },
     {
       id: 4,
       title: "Liên hệ",
       url: "/contact",
-      icon: <ContactsOutlined />,
+      icon:<ContactsFilled />,
+      color:"#e0880a"
     },
     {
       id: 5,
       title: "Chính sách",
       url: "/policy",
-      icon: <ReadOutlined />,
+      icon: <ReadFilled />,
+      color:"#0a5ce0"
     },
   ];
   const [checkPageLogin, setCheckPageLogin] = useState(false);

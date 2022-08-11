@@ -1,6 +1,8 @@
 import axiosClient from "./axiosClient";
 import { AddPartner } from "../pages/partner";
-import {typePolicy} from "../pages/policy";
+import { AddService } from "../pages/service";
+
+
 
 export const login = async (data: object) => {
   let resData = await axiosClient.post("users/login", data);
@@ -52,5 +54,23 @@ export const getPolicy = async () => {
 };
 export const updatePolicy = async (id: string, data: object) => {
   let resData = await axiosClient.patch(`policies/${id}`, data);
+  return resData;
+};
+
+////////////////////Service/////////////////////////////
+export const services = async () => {
+  let resData = await axiosClient.get("services");
+  return resData;
+};
+export const addService = async (data: AddService) => {
+  let resData = await axiosClient.post("services", data);
+  return resData;
+};
+export const deleteService = async (id: string) => {
+  let resData = await axiosClient.delete(`services/${id}`);
+  return resData;
+};
+export const updateOneService = async (id: string, data: AddService) => {
+  let resData = await axiosClient.patch(`services/${id}`, data);
   return resData;
 };

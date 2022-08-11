@@ -3,7 +3,6 @@ import Head from "next/head";
 import { useAuth } from "../contexts/auth";
 
 const Home: NextPage = () => {
-  console.log("render");
   return (
     <div>
       <Head>
