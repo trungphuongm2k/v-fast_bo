@@ -7,7 +7,7 @@ const getStoreLocal = (item: string) => {
 };
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:4000/",
+  baseURL: process.env.HOST_NAME_API,
   headers: {
     accept: "application/json",
   },

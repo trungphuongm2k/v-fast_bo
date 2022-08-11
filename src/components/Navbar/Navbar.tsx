@@ -8,6 +8,7 @@ import {
   GoldFilled,
   ContactsFilled,
   ReadFilled,
+  AlertFilled,
   DoubleRightOutlined,
   DoubleLeftOutlined,
 } from "@ant-design/icons";
@@ -20,35 +21,42 @@ function Navbar() {
       title: "Thông tin chung",
       url: "/",
       icon: <HomeFilled />,
-      color:"#ee2b2b"
+      color: "#ee2b2b"
     },
     {
       id: 2,
       title: "Danh sách dịch vụ",
       url: "/service",
-      icon: <CustomerServiceFilled/>,
-      color:"#8f11d3"
+      icon: <CustomerServiceFilled />,
+      color: "#8f11d3"
     },
     {
       id: 3,
       title: "Danh sách đối tác",
       url: "/partner",
       icon: <GoldFilled />,
-      color:"#11d37b"
+      color: "#11d37b"
     },
     {
       id: 4,
-      title: "Liên hệ",
-      url: "/contact",
-      icon:<ContactsFilled />,
-      color:"#e0880a"
+      title: "Giải pháp",
+      url: "/solution",
+      icon: <AlertFilled />,
+      color: "#e0880a"
     },
     {
       id: 5,
+      title: "Liên hệ",
+      url: "/contact",
+      icon: <ContactsFilled />,
+      color: "#e0880a"
+    },
+    {
+      id: 6,
       title: "Chính sách",
       url: "/policy",
       icon: <ReadFilled />,
-      color:"#0a5ce0"
+      color: "#0a5ce0"
     },
   ];
   const [checkPageLogin, setCheckPageLogin] = useState(false);

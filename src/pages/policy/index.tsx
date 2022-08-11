@@ -126,7 +126,7 @@ function Policy() {
           disabled={disabledButton}
           onClick={() => handleUpdatePolicy()}
         >
-          Cập nhật
+          Cập nhật chính sách
         </Button>
       </div>
       <div className={cx("policy-editor")}>

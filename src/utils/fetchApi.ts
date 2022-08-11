@@ -2,8 +2,6 @@ import axiosClient from "./axiosClient";
 import { AddPartner } from "../pages/partner";
 import { AddService } from "../pages/service";
 
-
-
 export const login = async (data: object) => {
   let resData = await axiosClient.post("users/login", data);
   return resData;
@@ -72,5 +70,35 @@ export const deleteService = async (id: string) => {
 };
 export const updateOneService = async (id: string, data: AddService) => {
   let resData = await axiosClient.patch(`services/${id}`, data);
+  return resData;
+};
+
+////////////////////Contact/////////////////////////////
+export const getContact = async () => {
+  let resData = await axiosClient.get("contacts");
+  return resData;
+};
+export const updateContact = async (id: string, data: object) => {
+  let resData = await axiosClient.patch(`contacts/${id}`, data);
+  return resData;
+};
+
+////////////////////Solution/////////////////////////////
+export const getSolution = async () => {
+  let resData = await axiosClient.get("solutions");
+  return resData;
+};
+export const updateSolution = async (id: string, data: object) => {
+  let resData = await axiosClient.patch(`solutions/${id}`, data);
+  return resData;
+};
+
+////////////////////Company/////////////////////////////
+export const getCompany = async () => {
+  let resData = await axiosClient.get("companies");
+  return resData;
+};
+export const updateCompany = async (id: string, data: object) => {
+  let resData = await axiosClient.patch(`companies/${id}`, data);
   return resData;
 };
