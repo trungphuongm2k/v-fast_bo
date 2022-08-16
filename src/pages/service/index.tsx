@@ -196,11 +196,10 @@ function Service() {
       width: 250,
       render: (img: string) => (
         <div className={cx("img-service")}>
-          <Image
+          <img
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
             src={process.env.HOST_NAME_API + img}
             alt="partner"
-            layout="fill"
-            objectFit="contain"
           />
         </div>
       ),

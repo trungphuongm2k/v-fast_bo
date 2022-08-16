@@ -195,11 +195,10 @@ function Partner() {
       width: 250,
       render: (img: string) => (
         <div className={cx("img-partner")}>
-          <Image
+          <img
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
             src={process.env.HOST_NAME_API + img}
             alt="partner"
-            layout="fill"
-            objectFit="contain"
           />
         </div>
       ),
@@ -397,7 +396,7 @@ function Partner() {
       <Table
         columns={columns}
         dataSource={dataPartner}
-        pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}
+        pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
         tableLayout={"auto"}
         scroll={{ x: 900 }}
         loading={loading}

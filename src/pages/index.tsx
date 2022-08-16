@@ -127,11 +127,10 @@ const Home: NextPage = () => {
           >
             <div style={{ width: "150px", height: "120px" }}>
               {
-                company?.logo && <Image
+                company?.logo && <img
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
                   src={process.env.HOST_NAME_API + company?.logo}
                   alt="partner"
-                  layout="fill"
-                  objectFit="contain"
                 />
               }
             </div>
