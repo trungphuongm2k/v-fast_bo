@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import classNames from "classnames/bind";
-import styles from "./Partner.module.scss";
-import { Button, Form, Modal, Popconfirm, Table, Input, Upload } from "antd";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import classNames from 'classnames/bind';
+import styles from './Partner.module.scss';
+import { Button, Form, Modal, Popconfirm, Table, Input, Upload } from 'antd';
 import {
   EditFilled,
   DeleteFilled,
   PlusCircleFilled,
   UploadOutlined,
-} from "@ant-design/icons";
-import type { ColumnsType } from "antd/es/table";
+} from '@ant-design/icons';
+import type { ColumnsType } from 'antd/es/table';
 import {
   partners,
   uploadFile,
   addPartner,
   deletePartner,
   updateOnePartner,
-} from "../../utils/fetchApi";
-import { openNotificationWithIcon } from "../../contexts/auth";
+} from '../../utils/fetchApi';
+import { openNotificationWithIcon } from '../../contexts/auth';
 const cx = classNames.bind(styles);
 
 interface DataType {
@@ -63,14 +63,14 @@ function Partner() {
       const res = await deletePartner(id);
       console.log(res);
       openNotificationWithIcon(
-        "success",
-        "Xóa đối tác",
-        "Xóa đối tác thành công!"
+        'success',
+        'Xóa đối tác',
+        'Xóa đối tác thành công!'
       );
       setDataPartner(dataPartner.filter((partner) => partner.id !== id));
     } catch (error) {
       console.log(error);
-      openNotificationWithIcon("error", "Xóa đối tác", "Xóa đối tác thất bại!");
+      openNotificationWithIcon('error', 'Xóa đối tác', 'Xóa đối tác thất bại!');
     } finally {
       setConfirmLoading(false);
     }
@@ -86,21 +86,21 @@ function Partner() {
     setLoadingAddPartner(true);
     try {
       let bodyFormData = new FormData();
-      bodyFormData.append("file", values.image[0].originFileObj);
+      bodyFormData.append('file', values.image[0].originFileObj);
       const resImg = await uploadFile(bodyFormData);
       const img = resImg.data.path;
       const { name, url } = values;
       const res = await addPartner({ name, img, url });
       console.log(res);
       openNotificationWithIcon(
-        "success",
-        "Đối tác",
-        "Thêm đối tác thành công!"
+        'success',
+        'Đối tác',
+        'Thêm đối tác thành công!'
       );
       handleGetPartner();
     } catch (error) {
       console.log(error);
-      openNotificationWithIcon("error", "Đối tác", "Thêm đối tác thất bại!");
+      openNotificationWithIcon('error', 'Đối tác', 'Thêm đối tác thất bại!');
     } finally {
       setLoadingAddPartner(false);
     }
@@ -111,7 +111,7 @@ function Partner() {
       let img = updatePartner?.img as string;
       if (values.image) {
         let bodyFormData = new FormData();
-        bodyFormData.append("file", values.image[0].originFileObj);
+        bodyFormData.append('file', values.image[0].originFileObj);
         const resImg = await uploadFile(bodyFormData);
         img = resImg.data.path;
       }
@@ -120,27 +120,27 @@ function Partner() {
       const res = await updateOnePartner(id, { name, img, url });
       console.log(res);
       openNotificationWithIcon(
-        "success",
-        "Đối tác",
-        "Sửa thông tin đối tác thành công!"
+        'success',
+        'Đối tác',
+        'Sửa thông tin đối tác thành công!'
       );
       handleGetPartner();
     } catch (error) {
       console.log(error);
       openNotificationWithIcon(
-        "error",
-        "Đối tác",
-        "Sửa thông tin đối tác thất bại!"
+        'error',
+        'Đối tác',
+        'Sửa thông tin đối tác thất bại!'
       );
     } finally {
       setLoadingUpdatePartner(false);
     }
   };
   const onFinishAddFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
   const onFinishUpdateFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
   const handleOpenModalUpdate = (id: string) => {
     const checkPartner = dataPartner.filter((partner) => partner.id === id)[0];
@@ -157,8 +157,8 @@ function Partner() {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Hành động",
-      dataIndex: "id",
+      title: 'Hành động',
+      dataIndex: 'id',
       width: 200,
       render: (id: string) => (
         <div key={id}>
@@ -185,27 +185,28 @@ function Partner() {
       ),
     },
     {
-      title: "Tên",
-      dataIndex: "name",
-      key: "name",
+      title: 'Tên',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: "Ảnh đại diện",
-      dataIndex: "img",
+      title: 'Ảnh đại diện',
+      dataIndex: 'img',
       width: 250,
       render: (img: string) => (
-        <div className={cx("img-partner")}>
+        <div className={cx('img-partner')}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-            src={process.env.HOST_NAME_API + img}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            src={process.env.HOST_NAME_API + '/' + img}
             alt="partner"
           />
         </div>
       ),
     },
     {
-      title: "Đường dẫn tới trang",
-      dataIndex: "url",
+      title: 'Đường dẫn tới trang',
+      dataIndex: 'url',
       render: (url: string) => (
         <a href={url} target="_blank" rel="noreferrer">
           {url}
@@ -228,8 +229,8 @@ function Partner() {
     return e?.fileList;
   };
   return (
-    <main className={cx("partner")}>
-      <div className={cx("partner-head")}>
+    <main className={cx('partner')}>
+      <div className={cx('partner-head')}>
         <h1>Quản lý danh sách đối tác</h1>
         <Button
           type="primary"
@@ -263,7 +264,7 @@ function Partner() {
             <Form.Item
               label="Tên đối tác"
               name="name"
-              rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+              rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
             >
               <Input />
             </Form.Item>
@@ -273,10 +274,10 @@ function Partner() {
               label="Ảnh đại điện"
               valuePropName="fileList"
               getValueFromEvent={normFile}
-              rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+              rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
             >
               <Upload
-                listType={"picture-card"}
+                listType={'picture-card'}
                 maxCount={1}
                 multiple={false}
                 showUploadList={{
@@ -296,11 +297,11 @@ function Partner() {
               name="url"
               label="URL"
               rules={[
-                { required: true, message: "Không bỏ trống!!!" },
+                { required: true, message: 'Không bỏ trống!!!' },
                 {
-                  type: "url",
+                  type: 'url',
                   warningOnly: true,
-                  message: "Không phải url!!!",
+                  message: 'Không phải url!!!',
                 },
               ]}
             >
@@ -341,7 +342,7 @@ function Partner() {
           <Form.Item
             label="Tên đối tác"
             name="name"
-            rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+            rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
           >
             <Input />
           </Form.Item>
@@ -352,7 +353,7 @@ function Partner() {
             getValueFromEvent={normUpdateFile}
           >
             <Upload
-              listType={"picture-card"}
+              listType={'picture-card'}
               maxCount={1}
               multiple={false}
               showUploadList={{
@@ -372,11 +373,11 @@ function Partner() {
             name="url"
             label="URL"
             rules={[
-              { required: true, message: "Không bỏ trống!!!" },
+              { required: true, message: 'Không bỏ trống!!!' },
               {
-                type: "url",
+                type: 'url',
                 warningOnly: true,
-                message: "Không phải url!!!",
+                message: 'Không phải url!!!',
               },
             ]}
           >
@@ -396,8 +397,12 @@ function Partner() {
       <Table
         columns={columns}
         dataSource={dataPartner}
-        pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
-        tableLayout={"auto"}
+        pagination={{
+          defaultPageSize: 5,
+          showSizeChanger: true,
+          pageSizeOptions: ['5', '10', '15'],
+        }}
+        tableLayout={'auto'}
         scroll={{ x: 900 }}
         loading={loading}
         rowKey="id"

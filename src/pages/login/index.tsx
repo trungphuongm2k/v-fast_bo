@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { NextPage } from "next";
-import classNames from "classnames/bind";
-import { Button, Form, Input } from "antd";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import styles from "./Login.module.scss";
-import { useAuth, UserLogin } from "../../contexts/auth";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import { NextPage } from 'next';
+import classNames from 'classnames/bind';
+import { Button, Form, Input } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import styles from './Login.module.scss';
+import { useAuth, UserLogin } from '../../contexts/auth';
+import { useRouter } from 'next/router';
 const cx = classNames.bind(styles);
 
 const Login: NextPage = () => {
@@ -19,22 +19,23 @@ const Login: NextPage = () => {
     setLoading(false);
   };
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
   useEffect(() => {
     if (user) {
-      push("/");
+      push('/');
     }
   }, [user]);
   return (
-    <main className={cx("login")}>
-      <div className={cx("container")}>
-        <div className={cx("logo")}>
+    <main className={cx('login')}>
+      <div className={cx('container')}>
+        <div className={cx('logo')}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="vfast-logo-full.png" alt="Logo vFast" />
         </div>
-        <div className={cx("login-form")}>
+        <div className={cx('login-form')}>
           <h1>Đăng nhập</h1>
-          <div className={cx("form-main")}>
+          <div className={cx('form-main')}>
             <Form
               name="basic"
               labelCol={{ span: 8 }}
@@ -47,7 +48,7 @@ const Login: NextPage = () => {
               <Form.Item
                 label="Tên đăng nhập"
                 name="email"
-                rules={[{ required: true, message: "Nhập vào tài khoản!" }]}
+                rules={[{ required: true, message: 'Nhập vào tài khoản!' }]}
               >
                 <Input
                   size="large"
@@ -58,7 +59,7 @@ const Login: NextPage = () => {
               <Form.Item
                 label="Mật khẩu"
                 name="password"
-                rules={[{ required: true, message: "Nhập vào mật khẩu!" }]}
+                rules={[{ required: true, message: 'Nhập vào mật khẩu!' }]}
               >
                 <Input.Password
                   size="large"

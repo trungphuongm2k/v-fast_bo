@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import classNames from "classnames/bind";
-import styles from "./Service.module.scss";
-import { Button, Form, Modal, Popconfirm, Table, Input, Upload } from "antd";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import classNames from 'classnames/bind';
+import styles from './Service.module.scss';
+import { Button, Form, Modal, Popconfirm, Table, Input, Upload } from 'antd';
 import {
   EditFilled,
   DeleteFilled,
   PlusCircleFilled,
   UploadOutlined,
-} from "@ant-design/icons";
-import type { ColumnsType } from "antd/es/table";
+} from '@ant-design/icons';
+import type { ColumnsType } from 'antd/es/table';
 import {
   services,
   uploadFile,
   addService,
   deleteService,
   updateOneService,
-} from "../../utils/fetchApi";
-import { openNotificationWithIcon } from "../../contexts/auth";
-import TextArea from "antd/lib/input/TextArea";
+} from '../../utils/fetchApi';
+import { openNotificationWithIcon } from '../../contexts/auth';
+import TextArea from 'antd/lib/input/TextArea';
 const cx = classNames.bind(styles);
 
 interface DataType {
@@ -64,14 +64,14 @@ function Service() {
       const res = await deleteService(id);
       console.log(res);
       openNotificationWithIcon(
-        "success",
-        "Xóa dịch vụ",
-        "Xóa dịch vụ thành công!"
+        'success',
+        'Xóa dịch vụ',
+        'Xóa dịch vụ thành công!'
       );
       setDataService(dataService.filter((service) => service.id !== id));
     } catch (error) {
       console.log(error);
-      openNotificationWithIcon("error", "Xóa dịch vụ", "Xóa dịch vụ thất bại!");
+      openNotificationWithIcon('error', 'Xóa dịch vụ', 'Xóa dịch vụ thất bại!');
     } finally {
       setConfirmLoading(false);
     }
@@ -87,21 +87,21 @@ function Service() {
     setLoadingAddService(true);
     try {
       let bodyFormData = new FormData();
-      bodyFormData.append("file", values.image[0].originFileObj);
+      bodyFormData.append('file', values.image[0].originFileObj);
       const resImg = await uploadFile(bodyFormData);
       const img = resImg.data.path;
       const { title, description } = values;
       const res = await addService({ img, title, description });
       console.log(res);
       openNotificationWithIcon(
-        "success",
-        "Dịch vụ",
-        "Thêm bản ghi thành công!"
+        'success',
+        'Dịch vụ',
+        'Thêm bản ghi thành công!'
       );
       handleGetService();
     } catch (error) {
       console.log(error);
-      openNotificationWithIcon("error", "Dịch vụ", "Thêm bản ghi thất bại!");
+      openNotificationWithIcon('error', 'Dịch vụ', 'Thêm bản ghi thất bại!');
     } finally {
       setLoadingAddService(false);
     }
@@ -112,7 +112,7 @@ function Service() {
       let img = updateService?.img as string;
       if (values.image) {
         let bodyFormData = new FormData();
-        bodyFormData.append("file", values.image[0].originFileObj);
+        bodyFormData.append('file', values.image[0].originFileObj);
         const resImg = await uploadFile(bodyFormData);
         img = resImg.data.path;
       }
@@ -121,27 +121,27 @@ function Service() {
       const res = await updateOneService(id, { img, title, description });
       console.log(res);
       openNotificationWithIcon(
-        "success",
-        "Dịch vụ",
-        "Sửa thông tin dịch vụ thành công!"
+        'success',
+        'Dịch vụ',
+        'Sửa thông tin dịch vụ thành công!'
       );
       handleGetService();
     } catch (error) {
       console.log(error);
       openNotificationWithIcon(
-        "error",
-        "Dịch vụ",
-        "Sửa thông tin dịch vụ thất bại!"
+        'error',
+        'Dịch vụ',
+        'Sửa thông tin dịch vụ thất bại!'
       );
     } finally {
       setLoadingUpdateService(false);
     }
   };
   const onFinishAddFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
   const onFinishUpdateFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
   const handleOpenModalUpdate = (id: string) => {
     const checkService = dataService.filter((service) => service.id === id)[0];
@@ -158,8 +158,8 @@ function Service() {
   ////////////////////////////////////////////////////////////////////////////////////////////////
   const columns: ColumnsType<DataType> = [
     {
-      title: "Hành động",
-      dataIndex: "id",
+      title: 'Hành động',
+      dataIndex: 'id',
       width: 200,
       render: (id: string) => (
         <div key={id}>
@@ -186,28 +186,29 @@ function Service() {
       ),
     },
     {
-      title: "Tiêu đề",
-      dataIndex: "title",
-      key: "title",
+      title: 'Tiêu đề',
+      dataIndex: 'title',
+      key: 'title',
     },
     {
-      title: "Ảnh đại diện",
-      dataIndex: "img",
+      title: 'Ảnh đại diện',
+      dataIndex: 'img',
       width: 250,
       render: (img: string) => (
-        <div className={cx("img-service")}>
+        <div className={cx('img-service')}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-            src={process.env.HOST_NAME_API + img}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            src={process.env.HOST_NAME_API + '/' + img}
             alt="partner"
           />
         </div>
       ),
     },
     {
-      title: "Mô tả",
-      dataIndex: "description",
-      key: "description",
+      title: 'Mô tả',
+      dataIndex: 'description',
+      key: 'description',
     },
   ];
   const normFile = (e: any) => {
@@ -226,8 +227,8 @@ function Service() {
   };
   //////////////////////////////////////////////////////////////////
   return (
-    <main className={cx("service")}>
-      <div className={cx("service-head")}>
+    <main className={cx('service')}>
+      <div className={cx('service-head')}>
         <h1>Quản lý danh sách dịch vụ</h1>
         <Button
           type="primary"
@@ -261,7 +262,7 @@ function Service() {
             <Form.Item
               label="Tiêu đề"
               name="title"
-              rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+              rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
             >
               <Input />
             </Form.Item>
@@ -271,10 +272,10 @@ function Service() {
               label="Ảnh đại điện"
               valuePropName="fileList"
               getValueFromEvent={normFile}
-              rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+              rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
             >
               <Upload
-                listType={"picture-card"}
+                listType={'picture-card'}
                 maxCount={1}
                 multiple={false}
                 showUploadList={{
@@ -293,7 +294,7 @@ function Service() {
             <Form.Item
               name="description"
               label="Mô tả"
-              rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+              rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
             >
               <TextArea />
             </Form.Item>
@@ -332,7 +333,7 @@ function Service() {
           <Form.Item
             label="Tiêu đề"
             name="title"
-            rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+            rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
           >
             <Input />
           </Form.Item>
@@ -343,7 +344,7 @@ function Service() {
             getValueFromEvent={normUpdateFile}
           >
             <Upload
-              listType={"picture-card"}
+              listType={'picture-card'}
               maxCount={1}
               multiple={false}
               showUploadList={{
@@ -362,7 +363,7 @@ function Service() {
           <Form.Item
             name="description"
             label="Mô tả"
-            rules={[{ required: true, message: "Không bỏ trống!!!" }]}
+            rules={[{ required: true, message: 'Không bỏ trống!!!' }]}
           >
             <TextArea />
           </Form.Item>
@@ -383,9 +384,9 @@ function Service() {
         pagination={{
           defaultPageSize: 5,
           showSizeChanger: true,
-          pageSizeOptions: ["5", "10", "15"],
+          pageSizeOptions: ['5', '10', '15'],
         }}
-        tableLayout={"auto"}
+        tableLayout={'auto'}
         scroll={{ x: 900 }}
         loading={loading}
         rowKey="id"
